@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vera — portfolio</title>
+<!--
+  ═══════════════════════════════════════════════════════
+  HOW TO EDIT THIS FILE
+  - Anything marked  EDIT:  is placeholder — swap it for your real info.
+  - Art gallery: images live in the art/ folder — add more by copying a <figure class="frame"> block.
+  - Colors + fonts live in :root at the top of the CSS.
+  ═══════════════════════════════════════════════════════
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Space+Grotesk:wght@400;500;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFDF7;
+  --ink:#1B1B2E;
+  --pink:#FF5CA8;
+  --blue:#3B5BFF;
+  --yellow:#FFC53D;
+  --green:#35B36B;
+  --display:'Shrikhand', cursive;
+  --body:'Space Grotesk', sans-serif;
+  --hand:'Caveat', cursive;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.55;
+  /* faint dot grid, like graph paper */
+  background-image:radial-gradient(rgba(27,27,46,.07) 1px, transparent 1px);
+  background-size:26px 26px;
+}
+::selection{background:var(--yellow)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:4px}
+
+/* ---------- nav ---------- */
+nav{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+  padding:14px 22px;
+  background:rgba(255,253,247,.92);
+  backdrop-filter:blur(6px);
+  border-bottom:3px solid var(--ink);
+}
+.nav-name{
+  font-family:var(--display);
+  font-size:1.35rem;
+  margin-right:auto;
+  text-decoration:none;
+  line-height:1;
+}
+.nav-name span{color:var(--pink)}
+nav .links{display:flex;gap:6px;flex-wrap:wrap}
+nav .links a{
+  text-decoration:none;
+  font-weight:700;
+  font-size:.92rem;
+  padding:7px 14px;
+  border:2.5px solid transparent;
+  border-radius:999px;
+  transition:transform .12s ease, border-color .12s ease, background .12s ease;
+}
+nav .links a:hover{
+  border-color:var(--ink);
+  background:var(--yellow);
+  transform:rotate(-2deg);
+}
+
+/* ---------- shared section bits ---------- */
+section{max-width:1060px;margin:0 auto;padding:84px 24px}
+.eyebrow{
+  display:inline-block;
+  font-family:var(--hand);
+  font-size:1.5rem;
+  color:var(--blue);
+  transform:rotate(-2deg);
+  margin-bottom:6px;
+}
+h2{
+  font-family:var(--display);
+  font-size:clamp(2rem, 5vw, 3rem);
+  line-height:1.1;
+  margin-bottom:34px;
+  position:relative;
+  display:inline-block;
+}
+/* marker highlight behind headings */
+h2 .hl{
+  background-image:linear-gradient(104deg, transparent 2%, var(--yellow) 4%, var(--yellow) 96%, transparent 98%);
+  background-size:100% 46%;
+  background-repeat:no-repeat;
+  background-position:0 78%;
+  padding:0 6px;
+}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:calc(100vh - 70px);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;position:relative;padding-top:40px;
+}
+.hero h1{
+  font-family:var(--display);
+  font-size:clamp(3.2rem, 11vw, 7.5rem);
+  line-height:1.02;
+  letter-spacing:.01em;
+}
+.hero h1 .pink{color:var(--pink)}
+.hero .tag{
+  font-size:clamp(1.05rem, 2.4vw, 1.35rem);
+  max-width:34ch;
+  margin-top:18px;
+  font-weight:500;
+}
+.hero .tag b{
+  background-image:linear-gradient(104deg, transparent 2%, #FFD9EB 4%, #FFD9EB 96%, transparent 98%);
+  background-size:100% 55%;background-repeat:no-repeat;background-position:0 85%;
+}
+.hero-note{
+  font-family:var(--hand);font-size:1.35rem;color:var(--ink);
+  margin-top:26px;transform:rotate(-1.5deg);opacity:.85;
+}
+/* the blob mascot */
+.blob-wrap{margin-top:34px;position:relative;width:190px;height:170px}
+.blob{
+  width:100%;height:100%;
+  background:var(--pink);
+  border:4px solid var(--ink);
+  border-radius:48% 52% 55% 45% / 55% 48% 52% 45%;
+  position:relative;
+  box-shadow:8px 8px 0 var(--ink);
+  animation:squish 5s ease-in-out infinite;
+}
+@keyframes squish{
+  0%,100%{border-radius:48% 52% 55% 45% / 55% 48% 52% 45%;transform:rotate(-2deg)}
+  50%{border-radius:55% 45% 48% 52% / 46% 55% 45% 54%;transform:rotate(2deg)}
+}
+.eye{
+  position:absolute;top:44px;
+  width:44px;height:44px;background:#fff;
+  border:4px solid var(--ink);border-radius:50%;
+}
+.eye.l{left:36px}.eye.r{right:36px}
+.pupil{
+  position:absolute;left:50%;top:50%;
+  width:15px;height:15px;background:var(--ink);border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.mouth{
+  position:absolute;left:50%;bottom:34px;transform:translateX(-50%);
+  width:52px;height:26px;
+  border:4px solid var(--ink);border-top:none;
+  border-radius:0 0 60px 60px;
+  background:#fff;
+}
+.scroll-hint{
+  margin-top:48px;font-weight:700;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase;
+  opacity:.55;
+}
+
+/* ---------- sticker cards (projects) ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:34px}
+.card{
+  background:#fff;
+  border:3.5px solid var(--ink);
+  border-radius:18px;
+  padding:26px 24px 24px;
+  box-shadow:7px 7px 0 var(--ink);
+  position:relative;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.card:nth-child(odd){transform:rotate(-1.1deg)}
+.card:nth-child(even){transform:rotate(1.1deg)}
+.card:hover{transform:rotate(0) translateY(-5px);box-shadow:10px 12px 0 var(--ink)}
+.card h3{font-size:1.35rem;font-weight:700;margin-bottom:4px}
+.card .role{
+  font-family:var(--hand);font-size:1.25rem;color:var(--pink);margin-bottom:12px;
+}
+.card p{font-size:.98rem;margin-bottom:14px}
+.badge{
+  position:absolute;top:-16px;right:16px;
+  font-weight:700;font-size:.78rem;letter-spacing:.05em;
+  background:var(--yellow);
+  border:3px solid var(--ink);
+  border-radius:999px;
+  padding:5px 13px;
+  transform:rotate(3deg);
+}
+.badge.green{background:var(--green);color:#fff}
+.badge.blue{background:var(--blue);color:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chips span{
+  font-size:.78rem;font-weight:700;
+  border:2px solid var(--ink);
+  border-radius:999px;
+  padding:3px 11px;
+  background:var(--paper);
+}
+.card-note{
+  font-family:var(--hand);font-size:1.15rem;color:var(--blue);
+  margin-top:14px;transform:rotate(-1deg);display:block;
+}
+.card-links{display:flex;gap:10px;margin-top:14px}
+.card-links a{
+  font-size:.82rem;font-weight:700;text-decoration:none;
+  border:2.5px solid var(--ink);border-radius:999px;
+  padding:5px 13px;background:var(--yellow);
+  transition:transform .12s ease;
+}
+.card-links a:hover{transform:rotate(-2deg) translateY(-2px)}
+
+/* ---------- art gallery ---------- */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:38px 30px}
+.frame{
+  background:#fff;
+  border:3.5px solid var(--ink);
+  padding:12px 12px 14px;
+  box-shadow:6px 6px 0 var(--ink);
+  position:relative;
+  transition:transform .15s ease;
+}
+.frame:nth-child(3n+1){transform:rotate(-2deg)}
+.frame:nth-child(3n+2){transform:rotate(1.6deg)}
+.frame:nth-child(3n){transform:rotate(-.8deg)}
+.frame:hover{transform:rotate(0) scale(1.03);z-index:2}
+/* tape strip */
+.frame::before{
+  content:"";position:absolute;top:-14px;left:50%;
+  width:88px;height:26px;
+  transform:translateX(-50%) rotate(-3deg);
+  background:rgba(255,197,61,.75);
+  border:1.5px solid rgba(27,27,46,.25);
+}
+.frame img{
+  width:100%;height:auto;display:block;
+  border:2.5px solid var(--ink);
+}
+/* instagram embeds under the gallery */
+.ig-caption{
+  font-family:var(--hand);font-size:1.6rem;color:var(--blue);
+  transform:rotate(-1.5deg);display:block;
+  margin:56px 0 18px;
+}
+.ig-row{display:flex;flex-wrap:wrap;gap:24px;justify-content:flex-start}
+.ig-row .instagram-media{margin:0 !important}
+
+/* ---------- about + contact ---------- */
+.about-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:44px;align-items:start}
+.about-grid p{margin-bottom:14px}
+.fact-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.fact-list li{
+  background:#fff;border:3px solid var(--ink);border-radius:14px;
+  padding:12px 16px;box-shadow:5px 5px 0 var(--ink);
+  font-size:.95rem;font-weight:500;
+}
+.fact-list li:nth-child(odd){transform:rotate(-.8deg)}
+.fact-list li:nth-child(even){transform:rotate(.8deg)}
+.contact-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:30px}
+.btn{
+  display:inline-block;text-decoration:none;font-weight:700;
+  border:3.5px solid var(--ink);border-radius:999px;
+  padding:13px 26px;background:var(--pink);color:#fff;
+  box-shadow:5px 5px 0 var(--ink);
+  transition:transform .12s ease, box-shadow .12s ease;
+}
+.btn.alt{background:var(--blue)}
+.btn.plain{background:#fff;color:var(--ink)}
+.btn:hover{transform:translate(2px,2px) rotate(-1deg);box-shadow:2px 2px 0 var(--ink)}
+
+footer{
+  text-align:center;padding:40px 20px 56px;
+  font-family:var(--hand);font-size:1.35rem;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width:700px){
+  nav{padding:12px 14px}
+  nav .links a{padding:6px 10px;font-size:.84rem}
+  section{padding:64px 18px}
+  .about-grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .blob{animation:none}
+  *{transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-name" href="#top">vera<span>.</span></a>
+  <div class="links">
+    <a href="#projects">projects</a>
+    <a href="#art">art</a>
+    <a href="#about">about</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <h1>hi, i'm <span class="pink">vera</span>.</h1>
+  <p class="tag">i <b>design and build things</b> — websites, weird little tools, and art that doesn't take itself too seriously.</p>
+  <p class="hero-note">↓ this guy's eyes follow your mouse. you're welcome.</p>
+
+  <div class="blob-wrap" aria-hidden="true">
+    <div class="blob">
+      <div class="eye l"><div class="pupil"></div></div>
+      <div class="eye r"><div class="pupil"></div></div>
+      <div class="mouth"></div>
+    </div>
+  </div>
+
+  <p class="scroll-hint">scroll for the actual portfolio</p>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <span class="eyebrow">the stuff i build →</span><br>
+  <h2><span class="hl">projects</span></h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <span class="badge blue">IN PROGRESS</span>
+      <h3>Burman Books Media Corp</h3>
+      <span class="role">real client · full-stack redesign</span>
+      <p>Redesigning a publisher's manually-updated static site into a dynamic React site with a self-serve admin area, so the client can manage his own catalogue — books, authors, and categories — without touching code.</p>
+      <div class="chips">
+        <span>React</span><span>Express</span><span>PostgreSQL</span><span>Figma</span><span>Auth</span>
+      </div>
+      <span class="card-note">← v1 was vanilla HTML/CSS/JS. v2 is the whole stack, hand-built.</span>
+    </div>
+
+    <div class="card">
+      <span class="badge green">SHIPPED</span>
+      <h3>Figma Background Remover</h3>
+      <span class="role">local plugin · my own tool</span>
+      <p>Existing background-remover plugins were slow, jagged, and paywalled — so I built my own. Runs open-source AI models on-device instead of a paid server, with my own API wired up through ngrok.</p>
+      <div class="chips">
+        <span>Python</span><span>JavaScript</span><span>Figma API</span><span>Open-source ML</span>
+      </div>
+      <div class="card-links">
+        <a href="https://github.com/a1oevera/figma-bg-remove" target="_blank" rel="noopener">repo ↗</a>
+      </div>
+      <span class="card-note">← the CORS errors nearly won. they did not.</span>
+    </div>
+
+    <div class="card">
+      <span class="badge green">LIVE</span>
+      <h3>Sixhearts Foundation</h3>
+      <span class="role">real client · non-profit site</span>
+      <p>Site for a non-profit that resells donated goods and gives the proceeds to a rotating roster of charities. Covers the mission, how to donate, and the current and upcoming causes — built to be easy for the founder to keep updated.</p>
+      <div class="chips">
+        <span>HTML/CSS/JS</span><span>GitHub Pages</span><span>Custom domain</span>
+      </div>
+      <div class="card-links">
+        <a href="https://sixheartsfoundation.com" target="_blank" rel="noopener">live site ↗</a>
+        <a href="https://github.com/a1oevera/six-hearts-foundation" target="_blank" rel="noopener">repo ↗</a>
+      </div>
+      <span class="card-note">← declutter for a good cause.</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ ART ============ -->
+<section id="art">
+  <span class="eyebrow">the fun part →</span><br>
+  <h2><span class="hl">art</span></h2>
+
+  <!-- images live in the art/ folder next to this file — keep them together when hosting -->
+  <div class="gallery">
+    <figure class="frame">
+      <img src="art/fridge.jpg" alt="Digital painting of a girl with a black bob looking back over her shoulder from an open fridge, holding an aloe vera drink">
+    </figure>
+    <figure class="frame">
+      <img src="art/kirby.jpg" alt="Traditional painting of Kirby inhaling apples in front of Whispy Woods">
+    </figure>
+    <figure class="frame">
+      <img src="art/cowboy.jpg" alt="Digital painting of a girl in a cowboy hat crouching and pointing finger guns at the viewer">
+    </figure>
+    <figure class="frame">
+      <img src="art/headphones.jpg" alt="Grayscale digital portrait study of a girl with an updo, hair clips, and headphones">
+    </figure>
+    <figure class="frame">
+      <img src="art/sunglasses.jpg" alt="Grayscale digital portrait study of a girl in rectangular sunglasses with a hand resting on her head">
+    </figure>
+  </div>
+
+  <span class="ig-caption">instagram carousels... lots of them →</span>
+  <div class="ig-row">
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/C3oP8nXgO_U/?img_index=1" data-instgrm-version="14" style="max-width:420px;min-width:280px;width:100%;"></blockquote>
+    <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DL24JkTJIMD/?img_index=1" data-instgrm-version="14" style="max-width:420px;min-width:280px;width:100%;"></blockquote>
+  </div>
+  <script async src="https://www.instagram.com/embed.js"></script>
+</section>
+
+<!-- ============ ABOUT + CONTACT ============ -->
+<section id="about">
+  <span class="eyebrow">ok but who are you →</span><br>
+  <h2><span class="hl">about</span></h2>
+
+  <div class="about-grid">
+    <div>
+      <p>I'm Vera — an incoming Systems Design Engineering student at the University of Waterloo, based near Toronto. I come from a design background and I like building real things for real people more than making mockups nobody uses.</p>
+      <p>Right now that means client websites with hand-built backends (because I learn faster when I can't hide behind a service), tools I make because the existing ones annoy me, and art on the side.</p>
+      <p>I play frisbee in my free time and currently represent the number 1 junior girls team in the province!</p>
+
+      <div class="contact-row">
+        <!-- EDIT: put your real links in the href attributes below -->
+        <a class="btn" href="mailto:v.verahoang@gmail.com">email me</a>
+        <a class="btn alt" href="https://www.linkedin.com/in/vera-hoang-2232b2357/" target="_blank" rel="noopener">linkedin</a>
+        <a class="btn plain" href="https://github.com/a1oevera" target="_blank" rel="noopener">github</a>
+      </div>
+    </div>
+
+    <ul class="fact-list">
+      <li>🎓 SYDE '31 (co-op) @ Waterloo</li>
+      <li>🛠 currently learning: C++ &amp; React</li>
+      <li>💾 comfortable with: Java, Python, HTML/CSS/JS</li>
+      <li>🎨 Figma person. strong opinions about spacing.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  made by hand (and stubbornness) — vera, 2026
+</footer>
+
+<script>
+// googly eyes follow the cursor (disabled if reduced motion is preferred)
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var pupils = document.querySelectorAll('.pupil');
+  if (!pupils.length) return;
+  document.addEventListener('mousemove', function(e){
+    pupils.forEach(function(p){
+      var eye = p.parentElement.getBoundingClientRect();
+      var cx = eye.left + eye.width/2;
+      var cy = eye.top + eye.height/2;
+      var dx = e.clientX - cx, dy = e.clientY - cy;
+      var dist = Math.min(9, Math.hypot(dx,dy)/18);
+      var ang = Math.atan2(dy,dx);
+      p.style.transform = 'translate(calc(-50% + '+(Math.cos(ang)*dist)+'px), calc(-50% + '+(Math.sin(ang)*dist)+'px))';
+    });
+  }, {passive:true});
+})();
+</script>
+
+</body>
+</html>
